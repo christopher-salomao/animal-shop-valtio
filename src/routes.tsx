@@ -15,7 +15,7 @@ export const routes = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "cart",
+        path: "meu-carrinho",
         element: <Cart />,
       },
     ],
