@@ -35,7 +35,7 @@ export function addToCart(newItem: ProductProps) {
 }
 
 function saveCartToLocalStorage() {
-  localStorage.setItem("@animalShop", JSON.stringify(cartState.cart));
+  // localStorage.setItem("@animalShop", JSON.stringify(cartState.cart));
 }
 
 const localCart = localStorage.getItem("@animalShop");
