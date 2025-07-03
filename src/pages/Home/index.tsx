@@ -6,6 +6,8 @@ import { VscError } from "react-icons/vsc";
 import { useProducts } from "../../hooks/useProducts";
 import { formatPrice } from "../../utils/formatPrice";
 
+import { addToCart } from "../../stores/cartStore";
+
 function Home() {
   const { data: products, isLoading, isError } = useProducts();
 
@@ -63,7 +65,7 @@ function Home() {
                 {formatPrice.format(product.price)}
               </p>
             </Link>
-            <button className="absolute cursor-pointer bottom-24 right-2 bg-amber-300 text-white p-2 rounded-full shadow-md hover:bg-amber-400 transition-colors z-10">
+            <button onClick={() => addToCart(product)} className="absolute cursor-pointer bottom-24 right-2 bg-amber-300 text-white p-2 rounded-full shadow-md hover:bg-amber-400 transition-colors z-10">
               <FaCartPlus size={24} />
             </button>
           </div>
