@@ -8,3 +8,6 @@ body,
   @apply h-full w-full;
 }
 
+#root {
+  @apply flex flex-col;
+}

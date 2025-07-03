@@ -1,8 +1,39 @@
 // Página inicial do site, onde serão exibidos os produtos
 import { FaCartPlus } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { VscError } from "react-icons/vsc";
+
+import { useProducts } from "../../hooks/useProducts";
+import { formatPrice } from "../../utils/formatPrice";
 
 function Home() {
+  const { data: products, isLoading, isError } = useProducts();
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="w-20 h-20 border-4 border-zinc-400/80 border-b-zinc-950 rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="flex flex-col gap-3 justify-center items-center h-full">
+        <div className="flex items-center gap-2">
+          <VscError size={40} className="text-red-600" />
+          <span className="font-medium">Erro ao carregar produtos!</span>
+        </div>
+        <a
+          href="/"
+          className=" bg-lime-900 text-white font-bold px-3 py-2 rounded-md hover:bg-lime-800 transition-colors"
+        >
+          Tentar novamente
+        </a>
+      </div>
+    );
+  }
+
   return (
     <section className="mx-auto w-full max-w-7xl px-4">
       <h1 className="title text-3xl text-center font-bold mt-7 mb-3">
@@ -16,22 +47,27 @@ function Home() {
       <h2 className="title text-2xl font-bold mb-7">Confira nossos produtos</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-
-          <div className="relative hover:scale-103 transition-transform duration-300">
+        {products?.map((product) => (
+          <div
+            key={product.id}
+            className="relative hover:scale-103 transition-transform duration-300"
+          >
             <Link to={"/"}>
               <img
-                src="https://sujeitoprogramador.com/wp-content/uploads/2023/06/racao1.png"
-                alt=""
+                src={product.cover}
+                alt={product.title}
                 className="w-full max-h-48 object-contain rounded-lg shadow-md"
               />
-            <p className="font-medium mt-2">Ração Premier Fórmula para Cães Sênior</p>
-            <p className="text-lime-800 font-bold text-lg">R$ 199,90</p>
+              <p className="font-medium mt-2">{product.title}</p>
+              <p className="text-lime-800 font-bold text-lg">
+                {formatPrice.format(product.price)}
+              </p>
             </Link>
             <button className="absolute cursor-pointer bottom-24 right-2 bg-amber-300 text-white p-2 rounded-full shadow-md hover:bg-amber-400 transition-colors z-10">
               <FaCartPlus size={24} />
             </button>
           </div>
-
+        ))}
       </div>
     </section>
   );
