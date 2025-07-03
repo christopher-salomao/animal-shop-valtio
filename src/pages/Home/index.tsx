@@ -35,7 +35,7 @@ function Home() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-4">
+    <section className="mx-auto w-full max-w-7xl px-4 pb-7">
       <h1 className="title text-3xl text-center font-bold mt-7 mb-3">
         Tudo para o seu pet você encontra aqui!
       </h1>
