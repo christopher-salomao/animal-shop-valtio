@@ -2,7 +2,8 @@ import { FaCartShopping } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 import { useSnapshot } from "valtio";
-import { cartState } from "../../stores/cartStore";
+import { cartState } from "../../cartStore";
+
 
 import logo from "../../assets/logo.png";
 

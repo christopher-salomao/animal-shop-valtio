@@ -1,5 +1,5 @@
 import { proxy, subscribe } from "valtio";
-import { type ProductProps } from "../../src/interfaces/productProps";
+import type { ProductProps } from "./interfaces/productProps";
 import toast from "react-hot-toast";
 
 export interface CartProps extends ProductProps {

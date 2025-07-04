@@ -6,7 +6,7 @@ import { VscError } from "react-icons/vsc";
 import { useProducts } from "../../hooks/useProducts";
 import { formatPrice } from "../../utils/formatPrice";
 
-import { addToCart } from "../../stores/cartStore";
+import { addToCart } from "../../cartStore";
 
 function Home() {
   const { data: products, isLoading, isError } = useProducts();
