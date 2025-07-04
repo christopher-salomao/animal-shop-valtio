@@ -8,7 +8,6 @@ export interface CartProps extends ProductProps {
 
 export const cartState = proxy({
   cart: [] as CartProps[],
-  cartTotal: 0,
 });
 
 export function addToCart(newItem: ProductProps) {

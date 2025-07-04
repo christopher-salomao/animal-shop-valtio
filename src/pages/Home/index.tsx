@@ -17,15 +17,15 @@ function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center h-full">
+      <section className="flex justify-center items-center h-full">
         <div className="w-20 h-20 border-4 border-zinc-400/80 border-b-zinc-950 rounded-full animate-spin"></div>
-      </div>
+      </section>
     );
   }
 
   if (isError) {
     return (
-      <div className="flex flex-col gap-3 justify-center items-center h-full">
+      <section className="flex flex-col gap-3 justify-center items-center h-full">
         <div className="flex items-center gap-2">
           <VscError size={40} className="text-red-600" />
           <span className="font-medium">Erro ao carregar produtos!</span>
@@ -36,7 +36,7 @@ function Home() {
         >
           Tentar novamente
         </a>
-      </div>
+      </section>
     );
   }
 

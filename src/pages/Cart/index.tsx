@@ -1,13 +1,20 @@
 import { useSnapshot } from "valtio";
-import { cartState, addToCart, decrimentCartAmount, removeFromCart, clearCart } from "../../cartStore";
+import {
+  cartState,
+  addToCart,
+  decrimentCartAmount,
+  removeFromCart,
+  clearCart,
+} from "../../cartStore";
 import { formatPrice } from "../../utils/formatPrice";
 
 import { FaRegTrashAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCartShopping } from "react-icons/fa6";
 
 function Cart() {
   const snap = useSnapshot(cartState);
+  const navigate = useNavigate();
 
   if (snap.cart.length === 0) {
     return (
@@ -26,6 +33,14 @@ function Cart() {
         </Link>
       </section>
     );
+  }
+
+  function handleConfirmOrder() {
+    // Aqui você pode implementar a lógica para finalizar o pedido
+    // Por exemplo, enviar os dados do pedido para um servidor ou API
+    // Neste exemplo, vamos apenas limpar o carrinho e redirecionar para a página
+    clearCart();
+    navigate("/meu-carrinho/pedido-concluido");
   }
 
   return (
@@ -91,7 +106,10 @@ function Cart() {
         <div>
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold text-zinc-900 mt-4">
-              Total do carrinho: R$ 1110,99
+              Total do carrinho:{" "}
+              {formatPrice.format(
+                snap.cart.reduce((total, item) => total + item.total, 0)
+              )}
             </h2>
             <button
               onClick={() => clearCart()}
@@ -101,7 +119,7 @@ function Cart() {
               Remover todos os itens
             </button>
           </div>
-          <button className=" bg-lime-900 text-white font-bold px-3 py-2 rounded-md hover:bg-lime-800 transition-colors cursor-pointer">
+          <button onClick={handleConfirmOrder} className=" bg-lime-900 text-white font-bold px-3 py-2 rounded-md hover:bg-lime-800 transition-colors cursor-pointer">
             Finalizar compra
           </button>
         </div>

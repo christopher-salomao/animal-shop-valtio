@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
+import FinishOrder from "./pages/FinishOrder";
 
 import Layout from "./components/Layout";
 
@@ -18,6 +19,10 @@ export const routes = createBrowserRouter([
       {
         path: "meu-carrinho",
         element: <Cart />,
+      },
+      {
+        path: "meu-carrinho/pedido-concluido",
+        element: <FinishOrder />,
       },
       {
         path: "*",
