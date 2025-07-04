@@ -64,7 +64,7 @@ function ProductDetails() {
 
   return (
     <section className="w-full max-w-7xl mx-auto mt-10 flex flex-col items-center">
-      <h1 className="title text-2xl mt-2 mb-4">{product?.title}</h1>
+      <h1 className="title text-xl md:text-2xl mt-2 mb-4 text-center">{product?.title}</h1>
       <div className=" px-4 flex flex-col lg:flex-row items-center">
         <img
           className="w-full max-w-xs md:max-w-md"
