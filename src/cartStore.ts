@@ -1,6 +1,5 @@
 import { proxy, subscribe } from "valtio";
 import type { ProductProps } from "./interfaces/productProps";
-import toast from "react-hot-toast";
 
 export interface CartProps extends ProductProps {
   amount: number;
@@ -13,15 +12,7 @@ export const cartState = proxy({
 
 export function addToCart(newItem: ProductProps) {
   const itemIndex = cartState.cart.findIndex((item) => item.id === newItem.id);
-  toast.success("Produto adicionado ao carrinho!", {
-    style: {
-      background: "#121212",
-      color: "#fff",
-      fontSize: "16px",
-      fontWeight: "500",
-      borderRadius: "6px",
-    }
-  });
+
 
   if (itemIndex !== -1) {
     cartState.cart[itemIndex].amount += 1;
