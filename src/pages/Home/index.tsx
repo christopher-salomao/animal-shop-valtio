@@ -71,7 +71,7 @@ function Home() {
             key={product.id}
             className="relative hover:scale-103 transition-transform duration-300"
           >
-            <Link to={"/"}>
+            <Link to={`/produtos/${product.id}`}>
               <img
                 src={product.cover}
                 alt={product.title}

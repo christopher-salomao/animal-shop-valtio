@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import FinishOrder from "./pages/FinishOrder";
@@ -15,6 +16,10 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: "produtos/:id",
+        element: <ProductDetails />,
       },
       {
         path: "meu-carrinho",
