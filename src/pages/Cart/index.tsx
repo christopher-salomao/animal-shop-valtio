@@ -1,21 +1,29 @@
 import { useSnapshot } from "valtio";
-import { cartState, addToCart } from "../../cartStore";
+import { cartState, addToCart, decrimentCartAmount, removeFromCart, clearCart } from "../../cartStore";
 import { formatPrice } from "../../utils/formatPrice";
 
 import { FaRegTrashAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaCartShopping } from "react-icons/fa6";
 
 function Cart() {
   const snap = useSnapshot(cartState);
 
   if (snap.cart.length === 0) {
     return (
-      <section className="mx-auto w-full max-w-7xl px-4 pb-7 flex flex-col items-center">
-        <h1 className="title text-3xl text-center mt-7 mb-3">
-          Seu carrinho está vazio
+      <section className="mx-auto w-full max-w-7xl h-full px-4 pb-7 flex flex-col items-center justify-center gap-3">
+        <h1 className="text-3xl text-center font-bold mt-7 mb-3">
+          Seu carrinho está vazio!
         </h1>
-        <p className="text-center font-medium text-gray-600 mb-8">
+        <p className="text-center font-medium text-gray-600">
           Adicione produtos ao seu carrinho para continuar.
         </p>
+        <Link
+          to="/"
+          className=" bg-lime-900 text-white font-bold px-3 py-2 rounded-md hover:bg-lime-800 transition-colors"
+        >
+          Continue comprando <FaCartShopping size={22} className="inline" />
+        </Link>
       </section>
     );
   }
@@ -42,7 +50,8 @@ function Cart() {
                   {formatPrice.format(item.price)}
                 </p>
                 <button
-                  /* onClick={() => removeFromCart(item.id)} */ className="text-red-700 hover:text-red-800 font-bold flex items-center gap-1 mt-1 cursor-pointer"
+                  onClick={() => removeFromCart(item.id)}
+                  className="text-red-700 hover:text-red-800 font-bold flex items-center gap-1 mt-1 cursor-pointer"
                 >
                   <FaRegTrashAlt size={20} />
                   Remover
@@ -57,12 +66,16 @@ function Cart() {
                   <div>
                     <button
                       disabled={item.amount === 1}
+                      onClick={() => decrimentCartAmount(item.id)}
                       className="bg-amber-300 hover:bg-amber-400 transition-colors text-white px-1.5 text-lg font-black rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       -
                     </button>
                     <span className="mx-2">{item.amount}</span>
-                    <button onClick={() => addToCart(item)} className="bg-amber-300 hover:bg-amber-400 transition-colors  text-white px-1 text-lg font-black rounded cursor-pointer">
+                    <button
+                      onClick={() => addToCart(item)}
+                      className="bg-amber-300 hover:bg-amber-400 transition-colors  text-white px-1 text-lg font-black rounded cursor-pointer"
+                    >
                       +
                     </button>
                   </div>
@@ -80,12 +93,15 @@ function Cart() {
             <h2 className="text-2xl font-bold text-zinc-900 mt-4">
               Total do carrinho: R$ 1110,99
             </h2>
-            <button className="flex items-center gap-1 text-red-700 hover:text-red-800 font-bold cursor-pointer">
+            <button
+              onClick={() => clearCart()}
+              className="flex items-center gap-1 text-red-700 hover:text-red-800 font-bold cursor-pointer"
+            >
               <FaRegTrashAlt size={24} />
               Remover todos os itens
             </button>
           </div>
-          <button className="bg-lime-800 hover:bg-lime-900 transition-colors text-white px-4 py-2 mt-3 rounded cursor-pointer">
+          <button className=" bg-lime-900 text-white font-bold px-3 py-2 rounded-md hover:bg-lime-800 transition-colors cursor-pointer">
             Finalizar compra
           </button>
         </div>

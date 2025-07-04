@@ -8,11 +8,11 @@ export interface CartProps extends ProductProps {
 
 export const cartState = proxy({
   cart: [] as CartProps[],
+  cartTotal: 0,
 });
 
 export function addToCart(newItem: ProductProps) {
   const itemIndex = cartState.cart.findIndex((item) => item.id === newItem.id);
-
 
   if (itemIndex !== -1) {
     cartState.cart[itemIndex].amount += 1;
@@ -21,12 +21,36 @@ export function addToCart(newItem: ProductProps) {
   } else {
     cartState.cart.push({ ...newItem, amount: 1, total: newItem.price });
   }
+  saveCartToLocalStorage();
+}
 
+export function decrimentCartAmount(itemId: string) {
+  const itemIndex = cartState.cart.findIndex((item) => item.id === itemId);
+
+  if (itemIndex !== -1) {
+    cartState.cart[itemIndex].amount -= 1;
+    cartState.cart[itemIndex].total =
+      cartState.cart[itemIndex].amount * cartState.cart[itemIndex].price;
+  }
+  saveCartToLocalStorage();
+}
+
+export function removeFromCart(itemId: string) {
+  const itemIndex = cartState.cart.findIndex((item) => item.id === itemId);
+
+  if (itemIndex !== -1) {
+      cartState.cart.splice(itemIndex, 1);
+  }
+  saveCartToLocalStorage();
+}
+
+export function clearCart() {
+  cartState.cart = [];
   saveCartToLocalStorage();
 }
 
 function saveCartToLocalStorage() {
-  // localStorage.setItem("@animalShop", JSON.stringify(cartState.cart));
+  localStorage.setItem("@animalShop", JSON.stringify(cartState.cart));
 }
 
 const localCart = localStorage.getItem("@animalShop");
