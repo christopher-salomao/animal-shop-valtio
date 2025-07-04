@@ -11,3 +11,7 @@ body,
 #root {
   @apply flex flex-col;
 }
+
+.title {
+  @apply font-bold  border-b-2 border-b-amber-200 px-1 rounded-sm
+}
