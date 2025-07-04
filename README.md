@@ -6,6 +6,7 @@ Este é um desafio do curso "Fullstack Pro" do Sujeito Programador, onde foi des
 
 - **React**: Biblioteca JavaScript para construção de interfaces de usuário.
 - **Valtio**: Biblioteca para gerenciamento de estado reativo.
+- **TanStack Query**: Biblioteca para gerenciamento de dados assíncronos.
 - **TypeScript**: Superset do JavaScript que adiciona tipagem estática.
 - **Vite**: Ferramenta de construção rápida para projetos web.
 
